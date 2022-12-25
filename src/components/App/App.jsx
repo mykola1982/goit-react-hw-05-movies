@@ -1,4 +1,3 @@
-// import * as API from '../../api/tmdbAPI';
 import { Routes, Route } from 'react-router-dom';
 import { Home } from '../../pages/Home/Home';
 import { Movies } from '../../pages/Movies/Movies';
@@ -16,16 +15,8 @@ export const App = () => {
   //   } catch (error) {}
   // }
 
-  // async function fetchReviewsMovie() {
-  //   try {
-  //     const revievs = await API.fetchReviewsMovie(26503, 1);
-  //     console.log(revievs);
-  //   } catch (error) {}
-  // }
-
   // getSearchMovies();
-  // getCreditsMovies();
-  // fetchReviewsMovie();
+
   return (
     <Routes>
       <Route path="/" element={<SharedLoyout />}>

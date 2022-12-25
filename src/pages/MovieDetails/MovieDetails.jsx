@@ -4,27 +4,35 @@ import { useState, useEffect } from 'react';
 import * as API from '../../api/tmdbAPI';
 import { IMAGE_URL } from 'api/tmdbAPI';
 import { getGenres } from 'utils/getGenres';
+import { Loader } from 'components/Loader';
 
 export const MovieDetails = () => {
   const { movieId } = useParams();
 
   const [detailsMovie, setDetailsMovie] = useState(null);
-  // const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function getDetailsMovie() {
       try {
-        const movie = await API.fetchDetailsMovie(movieId);
+        setIsLoading(true);
 
+        const movie = await API.fetchDetailsMovie(movieId);
         setDetailsMovie(movie);
-        console.log(movie);
-      } catch (error) {}
+      } catch (error) {
+        setError({ error });
+      } finally {
+        setIsLoading(false);
+      }
     }
     getDetailsMovie();
   }, [movieId]);
 
   return (
     <>
+      {error && <p>Whoops, something went wrong: {error.message}</p>}
+      {isLoading && <Loader />}
       {detailsMovie && (
         <div>
           <img
@@ -45,6 +53,7 @@ export const MovieDetails = () => {
         </div>
       )}
       <div>
+        <h2>Additional information</h2>
         <ul>
           <li>
             <NavLink to="reviews">Reviews</NavLink>
