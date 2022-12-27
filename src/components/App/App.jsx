@@ -9,8 +9,8 @@ const Home = lazy(() => import('pages/Home'));
 const Movies = lazy(() => import('pages/Movies'));
 const MovieDetails = lazy(() => import('pages/MovieDetails'));
 const NotFound = lazy(() => import('pages/NotFound'));
-const Cast = lazy(() => import('../Cast/'));
-const Reviews = lazy(() => import('../Reviews'));
+const Cast = lazy(() => import('../Cast/Cast'));
+const Reviews = lazy(() => import('../Reviews/Reviews'));
 
 export const App = () => {
   return (
