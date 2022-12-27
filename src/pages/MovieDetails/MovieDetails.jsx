@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { Link, Outlet, useParams, useLocation } from 'react-router-dom';
+import { Outlet, useParams, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { FiChevronLeft } from 'react-icons/fi';
 
