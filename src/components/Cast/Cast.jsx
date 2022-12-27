@@ -6,6 +6,8 @@ import { IMAGE_URL } from 'api/tmdbAPI';
 import { castMaper } from 'utils/castMaper';
 import { Loader } from 'components/Loader';
 
+import { Section, Item, Img, Text } from './Cast.styled';
+
 export const Cast = () => {
   const { movieId } = useParams();
 
@@ -30,20 +32,25 @@ export const Cast = () => {
   }, [movieId]);
 
   return (
-    <>
+    <Section>
       {error && <p>Whoops, something went wrong: {error.message}</p>}
       {isLoading && <Loader />}
       {cast && (
         <ul>
           {cast.map(({ id, character, name, profile_path }) => (
-            <li key={id}>
-              <img src={IMAGE_URL + profile_path} alt={name} />
-              <p>{character}</p>
-              <p>{name}</p>
-            </li>
+            <Item key={id}>
+              <Img src={IMAGE_URL + profile_path} alt={name} />
+              <Text>
+                <b>Character: </b>
+                {character}
+              </Text>
+              <Text>
+                <b>Actor name: </b> {name}
+              </Text>
+            </Item>
           ))}
         </ul>
       )}
-    </>
+    </Section>
   );
 };

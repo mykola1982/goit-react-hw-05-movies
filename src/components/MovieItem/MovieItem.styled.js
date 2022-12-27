@@ -35,7 +35,7 @@ export const Raiting = styled.p`
 `;
 
 export const Img = styled.img`
-  height: 85%;
+  height: 83%;
   width: 100%;
   object-fit: cover;
   border-radius: 4px;

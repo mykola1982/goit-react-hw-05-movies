@@ -1,21 +1,34 @@
 import PropTypes from 'prop-types';
 
-import { Wrapper, Input, Icon } from './SearchBox.styled';
+import { Formik } from 'formik';
 
-export const SearchBox = ({ value, onChange }) => {
+import { StyledForm, Input, Button, Icon } from './SearchBox.styled';
+
+export const SearchBox = ({ onSubmit, velue }) => {
+  const handleSubmit = ({ query }) => {
+    onSubmit(query);
+  };
   return (
-    <Wrapper>
-      <Icon />
-      <Input
-        type="text"
-        value={value}
-        onChange={e => onChange(e.target.value)}
-      />
-    </Wrapper>
+    <>
+      <Formik initialValues={{ query: velue }} onSubmit={handleSubmit}>
+        <StyledForm>
+          <Input
+            name="query"
+            type="text"
+            autoComplete="off"
+            autoFocus
+            placeholder="Search movies"
+          />
+          <Button type="submit">
+            <Icon />
+            <p>Search</p>
+          </Button>
+        </StyledForm>
+      </Formik>
+    </>
   );
 };
 
 SearchBox.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
