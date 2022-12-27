@@ -5,6 +5,7 @@ import { FiChevronLeft } from 'react-icons/fi';
 
 import * as API from '../../api/tmdbAPI';
 import { IMAGE_URL } from 'api/tmdbAPI';
+import { normalizDetails } from 'utils/normalizDetails';
 import { getGenres } from 'utils/getGenres';
 import { Loader } from 'components/Loader';
 
@@ -34,7 +35,8 @@ const MovieDetails = () => {
         setIsLoading(true);
 
         const movie = await API.fetchDetailsMovie(movieId);
-        setDetailsMovie(movie);
+
+        setDetailsMovie(normalizDetails(movie));
       } catch (error) {
         setError({ error });
       } finally {
