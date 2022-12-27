@@ -39,7 +39,14 @@ const Cast = () => {
         <ul>
           {cast.map(({ id, character, name, profile_path }) => (
             <Item key={id}>
-              <Img src={IMAGE_URL + profile_path} alt={name} />
+              <Img
+                src={
+                  profile_path
+                    ? IMAGE_URL + profile_path
+                    : 'https://ik.imagekit.io/tc8jxffbcvf/default-movie-portrait_EmJUj9Tda5wa.jpg?tr=fo-auto,di-'
+                }
+                alt={name}
+              />
               <Text>
                 <b>Character: </b>
                 {character}
