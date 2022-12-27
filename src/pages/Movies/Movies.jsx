@@ -45,10 +45,10 @@ const Movies = () => {
   }, [searchQuery]);
 
   const handelSubmitForm = velue => {
-    setSearchParams(velue !== '' ? { query: velue.toLowerCase() } : {});
-    if (velue === '') {
-      toast('Please enter data to search.');
+    if (velue.trim() === '') {
+      return toast.error('Please enter data to search.');
     }
+    setSearchParams(velue !== '' ? { query: velue.toLowerCase().trim() } : {});
   };
 
   return (
