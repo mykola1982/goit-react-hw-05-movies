@@ -5,7 +5,7 @@ import { Loader } from 'components/Loader/Loader';
 import * as API from '../../api/tmdbAPI';
 import { moviesMaper } from 'utils/moviesMaper';
 
-export const Home = () => {
+const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -36,3 +36,5 @@ export const Home = () => {
     </main>
   );
 };
+
+export default Home;

@@ -31,4 +31,5 @@ export const SearchBox = ({ onSubmit, velue }) => {
 
 SearchBox.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  velue: PropTypes.string,
 };

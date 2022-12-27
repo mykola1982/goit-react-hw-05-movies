@@ -8,10 +8,10 @@ import { Loader } from 'components/Loader';
 
 import { Section, Item, Img, Text } from './Cast.styled';
 
-export const Cast = () => {
+const Cast = () => {
   const { movieId } = useParams();
 
-  const [cast, setCast] = useState(null);
+  const [cast, setCast] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -35,7 +35,7 @@ export const Cast = () => {
     <Section>
       {error && <p>Whoops, something went wrong: {error.message}</p>}
       {isLoading && <Loader />}
-      {cast && (
+      {cast.length > 0 ? (
         <ul>
           {cast.map(({ id, character, name, profile_path }) => (
             <Item key={id}>
@@ -50,7 +50,11 @@ export const Cast = () => {
             </Item>
           ))}
         </ul>
+      ) : (
+        <Text>No cast information available</Text>
       )}
     </Section>
   );
 };
+
+export default Cast;

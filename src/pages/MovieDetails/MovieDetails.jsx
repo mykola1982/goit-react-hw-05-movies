@@ -1,5 +1,7 @@
-import { Outlet, useParams } from 'react-router-dom';
+import { Suspense } from 'react';
+import { Link, Outlet, useParams, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { FiChevronLeft } from 'react-icons/fi';
 
 import * as API from '../../api/tmdbAPI';
 import { IMAGE_URL } from 'api/tmdbAPI';
@@ -16,11 +18,12 @@ import {
   StyledLink,
   List,
   Item,
+  StyledLinkBack,
 } from './MovieDetails.styled';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
+  const location = useLocation();
   const { movieId } = useParams();
-
   const [detailsMovie, setDetailsMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -41,6 +44,8 @@ export const MovieDetails = () => {
     getDetailsMovie();
   }, [movieId]);
 
+  const backLinkHref = location.state?.from ?? '/';
+
   return (
     <>
       {error && <p>Whoops, something went wrong: {error.message}</p>}
@@ -48,10 +53,17 @@ export const MovieDetails = () => {
 
       {detailsMovie && (
         <>
-          <button type="button">Go back</button>
+          <StyledLinkBack to={backLinkHref}>
+            <FiChevronLeft size="24" />
+            Go back
+          </StyledLinkBack>
           <Section>
             <Img
-              src={IMAGE_URL + detailsMovie.poster_path}
+              src={
+                detailsMovie.poster_path
+                  ? IMAGE_URL + detailsMovie.poster_path
+                  : 'https://ik.imagekit.io/tc8jxffbcvf/default-movie-portrait_EmJUj9Tda5wa.jpg?tr=fo-auto,di-'
+              }
               alt={detailsMovie.title}
               width="250"
             />
@@ -86,9 +98,13 @@ export const MovieDetails = () => {
               </Item>
             </List>
           </AddInformation>
-          <Outlet />{' '}
+          <Suspense fallback={null}>
+            <Outlet />
+          </Suspense>
         </>
       )}
     </>
   );
 };
+
+export default MovieDetails;

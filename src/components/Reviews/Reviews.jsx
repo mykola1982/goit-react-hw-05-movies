@@ -7,7 +7,7 @@ import { Loader } from 'components/Loader';
 
 import { Section, Item, Text } from './Reviews.styled';
 
-export const Reviews = () => {
+const Reviews = () => {
   const { movieId } = useParams();
 
   const [reviews, setReviews] = useState([]);
@@ -48,8 +48,10 @@ export const Reviews = () => {
           </ul>
         </Section>
       ) : (
-        <p>No comments have been left yet...</p>
+        <Text>No comments have been left yet...</Text>
       )}
     </>
   );
 };
+
+export default Reviews;
