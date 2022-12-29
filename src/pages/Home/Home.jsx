@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { MoviesList } from 'components/MoviesList';
 import { Loader } from 'components/Loader/Loader';
@@ -9,6 +10,7 @@ const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     async function getTrendingtMovis() {
@@ -32,7 +34,9 @@ const Home = () => {
       <h1>Trending today</h1>
       {error && <p>Whoops, something went wrong: {error.message}</p>}
       {isLoading && <Loader />}
-      {trendingMovies?.length > 0 && <MoviesList movies={trendingMovies} />}
+      {trendingMovies?.length > 0 && (
+        <MoviesList movies={trendingMovies} location={location} />
+      )}
     </main>
   );
 };
